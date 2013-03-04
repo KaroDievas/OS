@@ -21,8 +21,6 @@ public class procesor {
 	 * procesor mode
 	 */
 	private int mode;
-	
-	private String RAM[];
 	/**
 	 * @param args
 	 */
@@ -45,15 +43,7 @@ public class procesor {
 		this.setTi(0000);
 		
 	}
-	
-	public void createMemory() {
-		
-	}
-	
-	public void freeMemory(int block, int word) {
-		
-	}
-	
+
 	public int getPtr() {
 		return ptr;
 	}
