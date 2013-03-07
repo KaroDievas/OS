@@ -1,0 +1,66 @@
+package UI;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import java.awt.BorderLayout;
+import javax.swing.JPanel;
+import javax.swing.JTextPane;
+import javax.swing.JTextField;
+
+public class UI {
+
+	private JFrame frame;
+	private JTextField txtGsdgdsfgd;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					UI window = new UI();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	public UI() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 450, 300);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		frame.getContentPane().add(scrollPane, BorderLayout.EAST);
+		
+		JPanel panel = new JPanel();
+		frame.getContentPane().add(panel, BorderLayout.WEST);
+		
+		JTextPane textPane = new JTextPane();
+		panel.add(textPane);
+		
+		txtGsdgdsfgd = new JTextField();
+		txtGsdgdsfgd.setText("gsdgdsfgd");
+		panel.add(txtGsdgdsfgd);
+		txtGsdgdsfgd.setColumns(10);
+		
+		JTextPane textPane_1 = new JTextPane();
+		panel.add(textPane_1);
+	}
+
+}
