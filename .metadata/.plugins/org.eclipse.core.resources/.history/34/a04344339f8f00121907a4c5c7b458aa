@@ -11,9 +11,6 @@ import javax.swing.JTextField;
 import javax.swing.JLabel;
 import java.awt.FlowLayout;
 import javax.swing.SpringLayout;
-import javax.swing.JComboBox;
-import javax.swing.JTextArea;
-import javax.swing.JButton;
 
 public class UI {
 
@@ -28,7 +25,6 @@ public class UI {
 	private JTextField textField_7;
 	private JTextField textField_8;
 	private JTextField textField_9;
-	private JTextField textField_10;
 
 	/**
 	 * Launch the application.
@@ -185,36 +181,5 @@ public class UI {
 		springLayout.putConstraint(SpringLayout.EAST, textField_9, -199, SpringLayout.EAST, frame.getContentPane());
 		frame.getContentPane().add(textField_9);
 		textField_9.setColumns(10);
-		
-		textField_10 = new JTextField();
-		springLayout.putConstraint(SpringLayout.WEST, textField_10, 122, SpringLayout.EAST, lblNewLabel_4);
-		springLayout.putConstraint(SpringLayout.EAST, textField_10, 156, SpringLayout.EAST, lblNewLabel_4);
-		frame.getContentPane().add(textField_10);
-		textField_10.setColumns(10);
-		
-		JLabel lblMode = new JLabel("MODE");
-		springLayout.putConstraint(SpringLayout.NORTH, textField_10, 9, SpringLayout.SOUTH, lblMode);
-		springLayout.putConstraint(SpringLayout.NORTH, lblMode, 3, SpringLayout.NORTH, textField_3);
-		springLayout.putConstraint(SpringLayout.WEST, lblMode, 90, SpringLayout.EAST, textField_3);
-		springLayout.putConstraint(SpringLayout.EAST, lblMode, 124, SpringLayout.EAST, textField_3);
-		frame.getContentPane().add(lblMode);
-		
-		JTextArea textArea = new JTextArea();
-		springLayout.putConstraint(SpringLayout.NORTH, textArea, 31, SpringLayout.NORTH, frame.getContentPane());
-		springLayout.putConstraint(SpringLayout.WEST, textArea, -145, SpringLayout.EAST, frame.getContentPane());
-		springLayout.putConstraint(SpringLayout.SOUTH, textArea, 64, SpringLayout.SOUTH, textField_2);
-		springLayout.putConstraint(SpringLayout.EAST, textArea, -53, SpringLayout.EAST, frame.getContentPane());
-		textArea.setRows(5);
-		frame.getContentPane().add(textArea);
-		
-		JLabel lblNewLabel_10 = new JLabel("MEMORY");
-		springLayout.putConstraint(SpringLayout.NORTH, lblNewLabel_10, 0, SpringLayout.NORTH, lblNewLabel);
-		springLayout.putConstraint(SpringLayout.EAST, lblNewLabel_10, -80, SpringLayout.EAST, frame.getContentPane());
-		frame.getContentPane().add(lblNewLabel_10);
-		
-		JButton btnNewButton = new JButton("Vykdyti");
-		springLayout.putConstraint(SpringLayout.SOUTH, btnNewButton, -10, SpringLayout.SOUTH, frame.getContentPane());
-		springLayout.putConstraint(SpringLayout.EAST, btnNewButton, -169, SpringLayout.EAST, frame.getContentPane());
-		frame.getContentPane().add(btnNewButton);
 	}
 }
