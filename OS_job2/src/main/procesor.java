@@ -1,4 +1,5 @@
 package main;
+import main.memory;
 
 public class procesor {
 	/**
@@ -22,7 +23,8 @@ public class procesor {
 	 */
 	private int mode;
 	
-	private String RAM[];
+	private memory RAM;
+	
 	/**
 	 * @param args
 	 */
@@ -43,11 +45,11 @@ public class procesor {
 		this.setSi(0000);
 		this.setSp(0000);
 		this.setTi(0000);
-		
+		this.createMemory();
 	}
 	
 	public void createMemory() {
-		
+		this.RAM = new memory();
 	}
 	
 	public void freeMemory(int block, int word) {
