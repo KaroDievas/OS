@@ -1,11 +1,16 @@
 package UI;
+import main.memory;
 import main.procesor;
 
+import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Font;
 
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import java.awt.BorderLayout;
+
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.JTextField;
@@ -17,6 +22,7 @@ import javax.swing.JTextArea;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.ScrollPaneConstants;
 
 public class UI {
 
@@ -162,9 +168,9 @@ public class UI {
 		frame.getContentPane().add(lblNewLabel_8);
 		
 		JLabel lblNewLabel_9 = new JLabel("PI");
+		springLayout.putConstraint(SpringLayout.WEST, lblNewLabel_9, 233, SpringLayout.WEST, frame.getContentPane());
 		springLayout.putConstraint(SpringLayout.EAST, lblNewLabel_8, -20, SpringLayout.WEST, lblNewLabel_9);
 		springLayout.putConstraint(SpringLayout.NORTH, lblNewLabel_9, 3, SpringLayout.NORTH, MR);
-		springLayout.putConstraint(SpringLayout.WEST, lblNewLabel_9, 233, SpringLayout.WEST, frame.getContentPane());
 		frame.getContentPane().add(lblNewLabel_9);
 		
 		SI = new JTextField();
@@ -184,7 +190,6 @@ public class UI {
 		
 		PI = new JTextField();
 		springLayout.putConstraint(SpringLayout.NORTH, PI, -3, SpringLayout.NORTH, lblNewLabel_2);
-		springLayout.putConstraint(SpringLayout.WEST, PI, 0, SpringLayout.WEST, lblNewLabel_9);
 		frame.getContentPane().add(PI);
 		PI.setColumns(10);
 		
@@ -201,27 +206,41 @@ public class UI {
 		springLayout.putConstraint(SpringLayout.WEST, lblMode, 90, SpringLayout.EAST, DS);
 		springLayout.putConstraint(SpringLayout.EAST, lblMode, 124, SpringLayout.EAST, DS);
 		frame.getContentPane().add(lblMode);
-		
-		JTextArea MEMORY = new JTextArea();
-		springLayout.putConstraint(SpringLayout.EAST, PI, -161, SpringLayout.WEST, MEMORY);
-		springLayout.putConstraint(SpringLayout.EAST, lblNewLabel_9, -175, SpringLayout.WEST, MEMORY);
-		springLayout.putConstraint(SpringLayout.EAST, SP, -319, SpringLayout.WEST, MEMORY);
-		springLayout.putConstraint(SpringLayout.NORTH, MEMORY, 31, SpringLayout.NORTH, frame.getContentPane());
-		springLayout.putConstraint(SpringLayout.WEST, MEMORY, -145, SpringLayout.EAST, frame.getContentPane());
-		springLayout.putConstraint(SpringLayout.SOUTH, MEMORY, 64, SpringLayout.SOUTH, IP);
-		springLayout.putConstraint(SpringLayout.EAST, MEMORY, -53, SpringLayout.EAST, frame.getContentPane());
-		MEMORY.setRows(5);
-		frame.getContentPane().add(MEMORY);
+        JScrollPane areaScrollPane = new JScrollPane();
+        springLayout.putConstraint(SpringLayout.EAST, PI, -134, SpringLayout.WEST, areaScrollPane);
+        springLayout.putConstraint(SpringLayout.EAST, lblNewLabel_9, -148, SpringLayout.WEST, areaScrollPane);
+        springLayout.putConstraint(SpringLayout.EAST, SP, -292, SpringLayout.WEST, areaScrollPane);
+        springLayout.putConstraint(SpringLayout.NORTH, areaScrollPane, 20, SpringLayout.NORTH, frame.getContentPane());
+        springLayout.putConstraint(SpringLayout.WEST, areaScrollPane, 400, SpringLayout.WEST, frame.getContentPane());
+        springLayout.putConstraint(SpringLayout.SOUTH, areaScrollPane, -40, SpringLayout.SOUTH, frame.getContentPane());
+        springLayout.putConstraint(SpringLayout.EAST, areaScrollPane, 0, SpringLayout.EAST, frame.getContentPane());
+        areaScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        areaScrollPane.setPreferredSize(new Dimension(100, 100));
+        areaScrollPane.setBorder(
+            BorderFactory.createCompoundBorder(
+                BorderFactory.createCompoundBorder(
+                                BorderFactory.createTitledBorder("Plain Text"),
+                                BorderFactory.createEmptyBorder(5,5,5,5)),
+                areaScrollPane.getBorder()));
+        frame.getContentPane().add(areaScrollPane);
+        final JTextArea MEMORY = new JTextArea();
+        MEMORY.setTabSize(5);
+        MEMORY.setColumns(5);
+        areaScrollPane.setViewportView(MEMORY);
+        MEMORY.setFont(new Font("Serif", Font.ITALIC, 16));
+        MEMORY.setLineWrap(true);
+        MEMORY.setWrapStyleWord(true);
 		
 		JLabel lblNewLabel_10 = new JLabel("MEMORY");
-		springLayout.putConstraint(SpringLayout.NORTH, lblNewLabel_10, 0, SpringLayout.NORTH, lblNewLabel);
-		springLayout.putConstraint(SpringLayout.EAST, lblNewLabel_10, -80, SpringLayout.EAST, frame.getContentPane());
+		springLayout.putConstraint(SpringLayout.SOUTH, lblNewLabel_10, -6, SpringLayout.NORTH, areaScrollPane);
+		springLayout.putConstraint(SpringLayout.EAST, lblNewLabel_10, -69, SpringLayout.EAST, frame.getContentPane());
 		frame.getContentPane().add(lblNewLabel_10);
 		
 		JButton Run = new JButton(">>");
 		Run.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				setField();
+				showMemory(MEMORY);
 			}
 		});
 		springLayout.putConstraint(SpringLayout.SOUTH, Run, -10, SpringLayout.SOUTH, frame.getContentPane());
@@ -232,6 +251,7 @@ public class UI {
 		stepRun.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setField();
+				showMemory(MEMORY);
 			}
 		});
 		springLayout.putConstraint(SpringLayout.NORTH, stepRun, 0, SpringLayout.NORTH, Run);
@@ -239,6 +259,7 @@ public class UI {
 		frame.getContentPane().add(stepRun);
 		
 		IOI = new JTextField();
+		springLayout.putConstraint(SpringLayout.WEST, PI, 7, SpringLayout.EAST, IOI);
 		springLayout.putConstraint(SpringLayout.NORTH, IOI, -3, SpringLayout.NORTH, lblNewLabel_2);
 		springLayout.putConstraint(SpringLayout.WEST, IOI, 0, SpringLayout.WEST, lblNewLabel_8);
 		springLayout.putConstraint(SpringLayout.EAST, IOI, 203, SpringLayout.EAST, lblNewLabel_3);
@@ -257,6 +278,14 @@ public class UI {
 		DS.setText(Integer.toString(this.procesor.getDs()));
 		IP.setText(Integer.toString(this.procesor.getIp()));
 		PTR.setText(Integer.toString(this.procesor.getPtr()));
-		MR.setText(Integer.toString(this.procesor.getMr()));
+		MR.setText(this.procesor.getMr());
+	}
+	
+	public void showMemory(JTextArea MEMORY) {
+		memory ram1;
+		memory ram2;
+		MEMORY.setText("");
+		//ram1 = this.procesor.getRAM().getSuperVisorMemory(block, word);
+		MEMORY.append("0\n");		
 	}
 }

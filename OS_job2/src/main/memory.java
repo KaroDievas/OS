@@ -14,16 +14,16 @@ public class memory {
 		return userMemory[block][word];
 	}
 
-	public void setUserMemory(String[][] userMemory) {
-		this.userMemory = userMemory;
+	public void setUserMemory(int block, int word, String value) {
+		this.userMemory[block][word] = value;
 	}
 
 	public String getSuperVisorMemory(int block, int word) {
 		return superVisorMemory[block][word];
 	}
 
-	public void setSuperVisorMemory(String[][] superVisorMemory) {
-		this.superVisorMemory = superVisorMemory;
+	public void setSuperVisorMemory(int block, int word, String value) {
+		this.superVisorMemory[block][word] = value;
 	}
 	
 }

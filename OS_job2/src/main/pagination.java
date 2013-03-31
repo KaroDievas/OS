@@ -2,4 +2,25 @@ package main;
 
 public class pagination {
 
+	private memory RAM = null;
+	private int PTR = 0;
+	
+	
+	public pagination(memory rAM) {
+		this.RAM = rAM;
+	}
+	
+	public void setData(int PRT) {
+		this.PTR = PRT;
+	}
+	
+	public int getBlockNumber() {
+		
+		return 0;
+	}
+	
+	public int getWordNumber() {
+		
+		return 0;
+	}
 }

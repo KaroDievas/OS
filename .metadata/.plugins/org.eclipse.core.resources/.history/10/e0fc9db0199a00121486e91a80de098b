@@ -1,0 +1,42 @@
+package main;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class channelMechanism {
+	
+	int channelId1 = 0;
+	
+	public int base(int channelId, String outMessage) {
+		if (channelId1 == 1) {
+			
+		}
+		if (channelId1 == 2) {
+			this.output(outMessage);
+		}
+		return 0;
+	}
+	
+	
+	public void input() {
+		try (BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\KD\\Desktop\\2013-02-17\\2013-02-17_13-50-37.txt")))
+		{
+			String sCurrentLine;
+	
+			while ((sCurrentLine = br.readLine()) != null) {
+				
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
+	}
+	
+	
+	public void output(String outText) {
+		System.out.println(outText);
+	}
+	
+	
+	
+}
