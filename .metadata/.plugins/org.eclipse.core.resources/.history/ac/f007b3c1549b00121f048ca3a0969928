@@ -287,7 +287,6 @@ public class UI {
 		int i = 0;
 		int word = 0;
 		MEMORY.append("SuperVisor\n");
-		this.procesor.getRAM().setSuperVisorMemory(0, 0, 0, "labas");
 		while (i < 100) {
 			MEMORY.append(this.procesor.getRAM().getSuperVisorMemory(i, word, 0) + 
 					this.procesor.getRAM().getSuperVisorMemory(i, word, 1) +
@@ -302,10 +301,10 @@ public class UI {
 		i = 0;
 		word = 0;
 		while (i < 200) {
-			MEMORY.append(this.procesor.getRAM().getUserMemory(i, word, 0) + 
-					this.procesor.getRAM().getUserMemory(i, word, 1) +
-					this.procesor.getRAM().getUserMemory(i, word, 2) +
-					this.procesor.getRAM().getUserMemory(i, word, 3) + "\n");
+			MEMORY.append(this.procesor.getRAM().getSuperVisorMemory(i, word, 0) + 
+					this.procesor.getRAM().getSuperVisorMemory(i, word, 1) +
+					this.procesor.getRAM().getSuperVisorMemory(i, word, 2) +
+					this.procesor.getRAM().getSuperVisorMemory(i, word, 3) + "\n");
 			word++;
 			if (word ==10)
 				word = 0;

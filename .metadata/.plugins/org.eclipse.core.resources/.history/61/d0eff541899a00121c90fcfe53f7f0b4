@@ -56,12 +56,12 @@ public class procesor {
 		this.RAM.inicializeMemory();
 	}
 	
-	public void freeMemory(int memoryType, int block, int word, int bytee) {
+	public void freeMemory(int memoryType, int block, int word) {
 		if (memoryType == 1){
-			this.RAM.setSuperVisorMemory(block, word, bytee, null);
+			this.RAM.setSuperVisorMemory(block, word, "0");
 		}
 		if (memoryType == 2) {
-			this.RAM.setUserMemory(block, word, bytee, null);
+			this.RAM.setUserMemory(block, word, "0");
 		}
 	}
 	

@@ -6,8 +6,8 @@ public class memory {
 	private String superVisorMemory[][][];
 	
 	public void inicializeMemory() {
-		this.userMemory = new String[200][10][4];
-		this.superVisorMemory = new String[100][10][4];
+		this.userMemory = new String[199][9][3];
+		this.superVisorMemory = new String[99][9][3];
 	}
 
 	public String getUserMemory(int block, int word, int bytee) {

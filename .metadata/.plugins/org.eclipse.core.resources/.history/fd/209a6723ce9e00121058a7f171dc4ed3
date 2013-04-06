@@ -287,7 +287,6 @@ public class UI {
 		int i = 0;
 		int word = 0;
 		MEMORY.append("SuperVisor\n");
-		this.procesor.getRAM().setSuperVisorMemory(0, 0, 0, "labas");
 		while (i < 100) {
 			MEMORY.append(this.procesor.getRAM().getSuperVisorMemory(i, word, 0) + 
 					this.procesor.getRAM().getSuperVisorMemory(i, word, 1) +

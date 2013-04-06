@@ -58,10 +58,10 @@ public class procesor {
 	
 	public void freeMemory(int memoryType, int block, int word, int bytee) {
 		if (memoryType == 1){
-			this.RAM.setSuperVisorMemory(block, word, bytee, null);
+			this.RAM.setSuperVisorMemory(block, word, bytee, "0");
 		}
 		if (memoryType == 2) {
-			this.RAM.setUserMemory(block, word, bytee, null);
+			this.RAM.setUserMemory(block, word, bytee, "0");
 		}
 	}
 	

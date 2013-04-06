@@ -21,35 +21,17 @@ public class pagination {
 	}
 	
 	public int getBlockNumber() {
-		int blockNumber = -1;
-		if (this.ramMode == 0) {
-			
-		}
-		if (this.ramMode == 1) {
-			
-		}	
-		return blockNumber;
+		
+		return -1;
 	}
 	
 	public int getWordNumber() {
-		int WordNumber = -1;
-		if (this.ramMode == 0) {
-			
-		}
-		if (this.ramMode == 1) {
-			
-		}
-		return WordNumber;
+		
+		return -1;
 	}
 	
 	public int getbyteNumber() {
-		int byteNumber = -1;
-		if (this.ramMode == 0) {
-			
-		}
-		if (this.ramMode == 1) {
-			
-		}
-		return byteNumber;
+		
+		return -1;
 	}
 }
