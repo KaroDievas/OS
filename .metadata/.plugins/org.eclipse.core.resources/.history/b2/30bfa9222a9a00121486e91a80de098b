@@ -1,0 +1,15 @@
+package main;
+
+public class pagination {
+
+	private memory RAM = null;
+	private int PTR = 0;
+	
+	public void getResources(memory rAM, int PTR) {
+		this.RAM = rAM;
+		this.PTR = PTR;
+	}
+	
+	
+	
+}

@@ -1,0 +1,40 @@
+package main;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class channelMechanism {
+	
+	int channelId1 = 0;
+	
+	public int base(int channelId, String outMessage) {
+		if (channelId1 == 1) {
+			
+		}
+		if (channelId1 == 2) {
+			this.output(outMessage);
+		}
+		return 0;
+	}
+	
+	
+	public String input() {
+		try{
+		    BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
+		    String s = bufferRead.readLine();
+		}
+		catch(IOException e)
+		{
+			e.printStackTrace();
+		}
+		return s;
+	}
+	
+	
+	public void output(String outText) {
+		System.out.println(outText);
+	}
+	
+}
