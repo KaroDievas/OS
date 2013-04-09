@@ -2,6 +2,7 @@ package main;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Vector;
 
 public class procesor {
 	/**
@@ -30,9 +31,12 @@ public class procesor {
 	private memory RAM = null;
 	private channelMechanism channel = null;
 	private pagination paginationMechanism = null;
+	private int setMr;
 	/**
 	 * @param args
 	 */
+	Vector stekas=new Vector();
+	
 	
 	public void inicialize() {
 		this.setCs(0000);
@@ -156,8 +160,7 @@ public class procesor {
 	}
 	
 	public void READ() {
-		String line = null;
-		
+		String line = null;	
 	}
 	
 	public void PRINT(String value) {
@@ -261,6 +264,103 @@ public class procesor {
 		} 
 	}
 	
+	//----------------------------------------------------- cia rasau
+	// PRISIMINTI: rytoj dadeti LOAD,WRITE komandas; sutvarkyti steko 2 elementu problema; is laptopo perkelti nuskaityma.
+	public void ADDS(int poslinkis){ // pastaba: steke turi buti bent 2 elementai, kitaip pizdiec... (taisyti ir dokumente)
+	   int suma=0;
+	   int value1=0;
+	   int value2=0;
+	   value1=(int) stekas.firstElement();
+	   stekas.removeElement(value1);
+	   value2=(int) stekas.firstElement();
+	   stekas.removeElement(value2);
+	   suma=value1+value2;
+	   stekas.add(suma);
+	}
+	
+	public void SUBS(int poslinkis){ // pastaba: steke turi buti bent 2 elementai, kitaip pizdiec... (taisyti ir dokumente)
+		   int skirtumas=0;
+		   int value1=0;
+		   int value2=0;
+		   value1=(int) stekas.firstElement();
+		   stekas.removeElement(value1);
+		   value2=(int) stekas.firstElement();
+		   stekas.removeElement(value2);
+		   skirtumas=value2-value1;
+		   stekas.add(skirtumas);
+		}
+	
+	public void MULS(int poslinkis){ // pastaba: steke turi buti bent 2 elementai, kitaip pizdiec... (taisyti ir dokumente)
+		   int sandauga=0;
+		   int value1=0;
+		   int value2=0;
+		   value1=(int) stekas.firstElement();
+		   stekas.removeElement(value1);
+		   value2=(int) stekas.firstElement();
+		   stekas.removeElement(value2);
+		   sandauga=value2*value1;
+		   stekas.add(sandauga);
+		}
+	
+	public void DIVS(int poslinkis){ // pastaba: steke turi buti bent 2 elementai, kitaip pizdiec... (taisyti ir dokumente)
+		   int dalmuo=0;
+		   int value1=0;
+		   int value2=0;
+		   value1=(int) stekas.firstElement();
+		   stekas.removeElement(value1);
+		   value2=(int) stekas.firstElement();
+		   stekas.removeElement(value2);
+		   dalmuo=value2*value1;
+		   stekas.add(dalmuo);
+		}
+	
+    public void ADDR(int value1, int value2){
+    	this.setMr=value1 + value2; 	
+	}
+    
+    public void SUBR(int value1, int value2){
+    	this.setMr=value1 - value2; 	
+	}
+    
+    public void MULR(int value1, int value2){
+    	this.setMr=value1 * value2; 	
+	}
+    public void DIVR(int value1, int value2){
+    	this.setMr=value1 / value2; 	
+	}
+    
+    public void PUSH(int value1){
+    	stekas.add(0,new Integer(value1));
+    }
+	
+    public int POP(){
+        int value1;
+        value1=(int) stekas.firstElement();
+        stekas.removeElement(value1);
+        return value1;	
+    }
+    
+    public int CMPRS() {
+    	   int value1=0;
+		   int value2=0;
+		   value1=(int) stekas.firstElement();
+		   stekas.removeElement(value1);
+		   value2=(int) stekas.firstElement();
+		   stekas.removeElement(value2);
+		   stekas.add(0,new Integer(value2));
+		   stekas.add(0,new Integer(value1));
+		if (value1 > value2) {
+			return 1;
+		}
+		else if(value1 < value2) {
+			return 2;
+		}
+		else {
+			return 0;
+		}
+	}
+	//----------------------------------------------------- iki cia
+	
 	public memory getRAM() {
 		return RAM;
 	}
@@ -352,5 +452,4 @@ public class procesor {
 	public void setMode(int mode) {
 		this.mode = mode;
 	}
-
 }
