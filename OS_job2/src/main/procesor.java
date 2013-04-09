@@ -151,6 +151,10 @@ public class procesor {
 		
 	}
 	
+	public int CMPR() {
+	
+	}
+	
 	public void READ() {
 		String line = null;
 		
