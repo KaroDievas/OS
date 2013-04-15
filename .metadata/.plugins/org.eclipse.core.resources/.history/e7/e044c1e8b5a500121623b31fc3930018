@@ -294,7 +294,7 @@ public class procesor {
 						}
 						else {
 							//vykdom halt ir nutraukiam visus veiksmus
-							this.HALT();
+							
 						}
 						this.isFirstWord = false;
 					}
@@ -345,13 +345,6 @@ public class procesor {
 	 * Funkcija turi issaugoti buse i ram atminti
 	 */
 	public void saveState() {
-		
-	}
-	
-	/*
-	 * funkcija sukurianti virtualia maðina
-	 */
-	public void createVM() {
 		
 	}
 	
