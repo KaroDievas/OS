@@ -8,6 +8,7 @@ public class pagination {
 	 * ramMode = 0, user memory
 	 * ramMode = 1, super memory
 	 */
+	//zodziu kad per sita klase butu galima rasyti ir gauti duomenis is memory klases ir kad jie nesidubliuotu. taip kaip apraseme savo darbe
 	private int ramMode = 0;
 	
 	
