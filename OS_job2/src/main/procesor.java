@@ -1,7 +1,9 @@
 package main;
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Vector;
 
 public class procesor {
@@ -36,7 +38,21 @@ public class procesor {
 	 * @param args
 	 */
 	Vector stekas=new Vector();
+	private BufferedReader br;
+	private boolean isFirstWord = true;
+	private boolean isStart = false;
+	private boolean isEnd = false;
 	
+	public procesor() {
+		this.inicialize();
+		try {
+			br = new BufferedReader(new FileReader("C:\\Users\\KD\\Desktop\\2013-02-17\\2013-02-17_13-50-37.txt"));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.setMode(0);
+	}
 	
 	public void inicialize() {
 		this.setCs(0000);
@@ -154,9 +170,23 @@ public class procesor {
 		}
 		
 	}
-	
+	/*
+	 * Programa halt viska nunulina isveda i ekrana, jog programa baigta
+	 */
+	public void HALT() {
+		this.br = null;
+		this.isEnd = false;
+		this.isFirstWord = true;
+		this.isStart = false;
+		this.channel.base(2, "Klaidingas programos start");
+	}
+	/**
+	 * Programa nuskaito is klavieturos vedama teksta ir priskiria registrui
+	 */
 	public void READ() {
-		String line = null;	
+		String line = null;
+		line = this.channel.base(1, "");
+		this.mr = line;
 	}
 	
 	public void PRINT(String value) {
@@ -247,17 +277,82 @@ public class procesor {
 			this.setPi(3);
 		}
 	}
-	public void loadFile() {
-		try (BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\KD\\Desktop\\2013-02-17\\2013-02-17_13-50-37.txt")))
-		{
-			String sCurrentLine;
-			
-			while ((sCurrentLine = br.readLine()) != null) {
-				
+	
+	public void StepReading() {
+		try {
+			String sCurrentLine = br.readLine();
+			if (sCurrentLine != null) {
+				System.out.println(sCurrentLine);
+				String[] temp;
+				temp = sCurrentLine.split("\\ ");
+				if (this.isFirstWord) {
+					if (this.isStart == false) {
+						
+						if (temp[0] == "$START") {
+							//pirmas zodis butinai turi buti start
+							this.isStart = true;
+						}
+						else {
+							//vykdom halt ir nutraukiam visus veiksmus
+							this.HALT();
+						}
+						this.isFirstWord = false;
+					}
+				}
+				if (this.isStart && this.isFirstWord == false) {
+					int interrupt = this.interrupting();
+					if (interrupt == 0) {
+						//interruptu nera vykdom programa
+						
+					}
+					else {
+						//cia negerai, nes turim issaugoti busena ir tada pereiti i supervisor mode
+						
+						// tikrinam interruptus jungiams supervisor rezima
+						this.setMode(1);
+						if (interrupt == 1) { //IOI
+							/*switch (this.getIoi()) {
+							case 1: 
+								break;
+							case 2:
+								break;
+							case 3:
+								break;
+							case 4: 
+								break;
+							default: this.setPi(2);
+			                	break;*/
+						}
+						if (interrupt == 2) { //SI
+							
+						}
+						if (interrupt == 3) { //PI
+							
+						}
+						if (interrupt == 4) { //TI
+							
+						}
+					}
+				}	
+				this.setIp(this.getIp() + 1);
 			}
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
+		}
+	}
+	/*
+	 * Funkcija turi issaugoti buse i ram atminti
+	 */
+	public void saveState() {
+		
+	}
+	
+	/*
+	 * funkcija sukurianti virtualia maðina
+	 */
+	public void createVM() {
+		
 	}
 	
 	//----------------------------------------------------- cia rasau

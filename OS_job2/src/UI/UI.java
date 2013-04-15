@@ -58,11 +58,10 @@ public class UI {
 	}
 
 	/**
-	 * Create the application.
+	 * Create the application. 
 	 */
 	public UI() {
-		this.procesor = new procesor();
-		this.procesor.inicialize();
+		procesor = new procesor();
 		initialize();
 	}
 
@@ -250,6 +249,7 @@ public class UI {
 		JButton stepRun = new JButton(">");
 		stepRun.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				procesor.StepReading();
 				setField();
 				showMemory(MEMORY);
 			}
