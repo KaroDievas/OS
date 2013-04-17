@@ -198,14 +198,6 @@ public class procesor {
 		this.channel.base(2, value);
 	}
 	
-	public void LOAD(){
-		
-	}
-	
-	public void WRITE() {
-		
-	}
-	
 	public void JMP(int poslinkis) {
 		this.setIp(this.getIp() + poslinkis);
 	}
@@ -292,15 +284,9 @@ public class procesor {
 	}
 	
 	public void StepReading() {
-		this.READ();
-		System.out.println(this.getMr());
-		String sCurrentLine = null;
+		try {
 			if (br != null) {
-				try {
-					sCurrentLine = br.readLine();
-				} catch (IOException e) {
-					System.out.println("Nepavyko nuskaityti failo");
-				}
+				String sCurrentLine = br.readLine();
 				System.out.println(sCurrentLine);
 				String[] temp;
 				temp = sCurrentLine.split("\\ ");
@@ -325,10 +311,10 @@ public class procesor {
 						
 					}
 					else {
-						//issaugome busena
-						this.saveState();
-						// tikrinam interruptus jungiams supervisor rezima
+						//cia negerai, nes turim issaugoti busena ir tada pereiti i supervisor mode
 						
+						// tikrinam interruptus jungiams supervisor rezima
+						this.setMode(1);
 						if (interrupt == 1) { //IOI
 							switch (this.getIoi()) {
 							case 1: this.LOAD();
@@ -351,32 +337,21 @@ public class procesor {
 						if (interrupt == 4) { //TI
 							
 						}
-						//gryztame i buvusia busena ir toliau vykdome komandas
-						this.returnState();
 					}
 				}	
 				this.setIp(this.getIp() + 1);
 			}
+		} catch (IOException e) {
+			System.out.println("Programa baige darba");
 		}
 	}
 	/*
 	 * Funkcija turi issaugoti buse i ram atminti
 	 */
 	public void saveState() {
-		//pirma issaugome visus registrus tada keiciame masinos busena
 		
-		this.setMode(1);
 	}
 	
-	/*
-	 * FUnkcija grazinanti pries tai buvusia busena ir sunaikinanti tai kas buvo irasyta i ram
-	 */
-	public void returnState() {
-		//pirma pasiemame visus registrus, tada keiciame masinos busena
-		
-		
-		this.setMode(0);
-	}
 	/*
 	 * funkcija sukurianti virtualia maðina
 	 */

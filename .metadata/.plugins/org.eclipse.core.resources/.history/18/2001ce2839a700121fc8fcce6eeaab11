@@ -27,13 +27,11 @@ public class channelMechanism {
 		String s = null;
 		try{
 		    BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
-		    this.base(2, "Iveskite teksta");
 		    s = bufferRead.readLine();
 		}
 		catch(IOException e)
 		{
-			//e.printStackTrace();
-			this.base(2, "Ivedimo bibliotekos klaida");
+			e.printStackTrace();
 		}
 		return s;
 	}

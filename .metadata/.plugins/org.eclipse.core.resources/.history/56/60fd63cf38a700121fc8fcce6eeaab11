@@ -10,10 +10,10 @@ public class channelMechanism {
 	
 	public String base(int channelId, String outMessage) {
 		String s = null;
-		if (channelId == 1) {
+		if (channelId1 == 1) {
 			s = this.input();
 		}
-		else if (channelId == 2) {
+		else if (channelId1 == 2) {
 			this.output(outMessage);
 		}
 		else {
@@ -27,13 +27,11 @@ public class channelMechanism {
 		String s = null;
 		try{
 		    BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
-		    this.base(2, "Iveskite teksta");
 		    s = bufferRead.readLine();
 		}
 		catch(IOException e)
 		{
-			//e.printStackTrace();
-			this.base(2, "Ivedimo bibliotekos klaida");
+			e.printStackTrace();
 		}
 		return s;
 	}
