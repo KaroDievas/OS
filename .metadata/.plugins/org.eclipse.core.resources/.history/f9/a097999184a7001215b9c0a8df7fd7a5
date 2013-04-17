@@ -20,6 +20,7 @@ public class channelMechanism {
 		return s;
 	}
 	
+	
 	public String input() {
 		String s = null;
 		try{
@@ -29,6 +30,7 @@ public class channelMechanism {
 		}
 		catch(IOException e)
 		{
+			//e.printStackTrace();
 			this.base(2, "Ivedimo bibliotekos klaida");
 		}
 		return s;

@@ -1,11 +1,9 @@
 package main;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.LineNumberReader;
 import java.util.Vector;
 
 public class procesor {
@@ -44,28 +42,19 @@ public class procesor {
 	private boolean isFirstWord = true;
 	private boolean isStart = false;
 	private boolean isEnd = false;
-	private int maxIP = 0;
-	
 	
 	public procesor() {
 		this.inicialize();
 		try {
 			br = new BufferedReader(new FileReader("C:\\Users\\KD\\Desktop\\new\\2013-02-17\\2013-02-17_13-50-37.txt"));
-			LineNumberReader  lnr = new LineNumberReader(br);
-			try {
-				lnr.skip(Long.MAX_VALUE);
-				this.maxIP = lnr.getLineNumber();
-			} catch (IOException e) {
-				System.out.println("Klaida gaunant max failo eiluciu skaiciu");
-			}
 		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
 			System.out.println("Failas nerastas");
 		}
 		this.setMode(0);
 	}
-	/**
-	 * Inicializuojame visas pradiniu kintamuju reiksmes
-	 */
+	
 	public void inicialize() {
 		this.setCs(0000);
 		this.setDs(0000);
@@ -205,9 +194,6 @@ public class procesor {
 		this.mr = line;
 	}
 	
-	/*
-	 * funkcija kreipiasi i kanalu mechanizma ir isspauzdina nurodyta teksta
-	 */
 	public void PRINT(String value) {
 		this.channel.base(2, value);
 	}
@@ -221,14 +207,7 @@ public class procesor {
 	}
 	
 	public void JMP(int poslinkis) {
-		int newIP = this.getIp() + poslinkis;
-		if (newIP > this.maxIP) {
-			this.HALT();
-			this.channel.base(2, "Pezengtas IP rezis");
-		}
-		else {
-			this.setIp(newIP);
-		}
+		this.setIp(this.getIp() + poslinkis);
 	}
 	
 	public int CMPR(int value1, int value2) {
@@ -360,17 +339,17 @@ public class procesor {
 								break;
 							case 4: this.READ();
 								break;
-							default: System.out.println("IOI apdorojimo klaida");
+							default: this.setPi(2);
 			                	break;
 						}
 						if (interrupt == 2) { //SI
 							
 						}
 						if (interrupt == 3) { //PI
-							this.intPIValidation();
+							
 						}
 						if (interrupt == 4) { //TI
-							this.HALT();
+							
 						}
 						//gryztame i buvusia busena ir toliau vykdome komandas
 						this.returnState();
@@ -378,26 +357,6 @@ public class procesor {
 				}	
 				this.setIp(this.getIp() + 1);
 			}
-		}
-	}
-	
-	public void intPIValidation() {
-		int pi = this.getPi();
-		if (pi == 1) {
-			this.setMr("neteisingas adresas");
-			this.channel.base(2, this.getMr());
-		}
-		if (pi == 2) {
-			this.setMr("neteisingas operacijos kodas");
-			this.channel.base(2, this.getMr());
-		}
-		if (pi == 3) {
-			this.setMr("neteisingas priskyrimas");
-			this.channel.base(2, this.getMr());
-		}
-		if (pi == 4) {
-			this.setMr("perpildymas");
-			this.channel.base(2, this.getMr());
 		}
 	}
 	/*

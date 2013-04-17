@@ -29,6 +29,7 @@ public class channelMechanism {
 		}
 		catch(IOException e)
 		{
+			//e.printStackTrace();
 			this.base(2, "Ivedimo bibliotekos klaida");
 		}
 		return s;

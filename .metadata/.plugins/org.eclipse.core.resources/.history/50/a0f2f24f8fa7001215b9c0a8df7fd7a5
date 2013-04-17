@@ -367,7 +367,7 @@ public class procesor {
 							
 						}
 						if (interrupt == 3) { //PI
-							this.intPIValidation();
+							
 						}
 						if (interrupt == 4) { //TI
 							this.HALT();
@@ -381,25 +381,7 @@ public class procesor {
 		}
 	}
 	
-	public void intPIValidation() {
-		int pi = this.getPi();
-		if (pi == 1) {
-			this.setMr("neteisingas adresas");
-			this.channel.base(2, this.getMr());
-		}
-		if (pi == 2) {
-			this.setMr("neteisingas operacijos kodas");
-			this.channel.base(2, this.getMr());
-		}
-		if (pi == 3) {
-			this.setMr("neteisingas priskyrimas");
-			this.channel.base(2, this.getMr());
-		}
-		if (pi == 4) {
-			this.setMr("perpildymas");
-			this.channel.base(2, this.getMr());
-		}
-	}
+	
 	/*
 	 * Funkcija turi issaugoti buse i ram atminti
 	 */
