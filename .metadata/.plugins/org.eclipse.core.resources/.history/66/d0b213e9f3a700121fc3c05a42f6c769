@@ -77,7 +77,7 @@ public class procesor {
 		this.setPtr(0000);
 		this.setSi(0000);
 		this.setSp(0000);
-		this.setTi(255);
+		this.setTi(0000);
 		this.createMemory();
 		channel = new channelMechanism();
 		paginationMechanism = new pagination(this.getRAM());
@@ -169,16 +169,16 @@ public class procesor {
 	
 	
 	public int interrupting() {
-		if (this.getIoi() > 0) {
+		if (this.getIoi() == 0) {
 			return 1;
 		}
-		else if (this.getSi() > 0) {
+		else if (this.getSi() == 0) {
 			return 2;
 		}
-		else if (this.getPi() > 0) {
+		else if (this.getPi() == 0) {
 			return 3;	
 		}
-		else if (this.getTi() == 0) {
+		else if (this.getTi() != 0) {
 			return 4;
 		}
 		else {
@@ -375,7 +375,6 @@ public class procesor {
 						//gryztame i buvusia busena ir toliau vykdome komandas
 						this.returnState();
 					}
-					this.setTi(this.getTi() - 1);
 				}	
 				this.setIp(this.getIp() + 1);
 			}

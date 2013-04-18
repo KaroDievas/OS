@@ -375,7 +375,6 @@ public class procesor {
 						//gryztame i buvusia busena ir toliau vykdome komandas
 						this.returnState();
 					}
-					this.setTi(this.getTi() - 1);
 				}	
 				this.setIp(this.getIp() + 1);
 			}
