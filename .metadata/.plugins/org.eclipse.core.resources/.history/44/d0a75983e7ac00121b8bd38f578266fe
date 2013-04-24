@@ -206,7 +206,6 @@ public class procesor {
 		String line = null;
 		line = this.channel.base(1, "");
 		this.mr = line;
-		this.setIoi(0);
 	}
 	
 	/*
@@ -318,10 +317,10 @@ public class procesor {
 	
 	public void StepReading() {
 		String sCurrentLine = null;
-			if (br != null  && !this.isEnd) {
+			if (br != null) {
 				try {
-					if (this.getMode() == 0)
-						sCurrentLine = this.br.readLine();
+					//if (this.getMode() == 0)
+					sCurrentLine = this.br.readLine();
 				} catch (IOException e) {
 					System.out.println("Nepavyko nuskaityti failo");
 				}
@@ -330,8 +329,8 @@ public class procesor {
 				temp = sCurrentLine.split("\\ ");
 				if (this.isFirstWord) {
 					if (this.isStart == false) {
-						System.out.println(temp[0]);
-						if (temp[0].equalsIgnoreCase("$START")) {
+						
+						if (temp[0] == "$START") {
 							//pirmas zodis butinai turi buti $start
 							this.isStart = true;
 						}
@@ -346,20 +345,12 @@ public class procesor {
 					int interrupt = this.interrupting();
 					if (interrupt == 0) {
 						//interruptu nera vykdom programa
-						if (temp[0].equalsIgnoreCase("$START") ) {
-							
-						}
-						else if (temp[0].equalsIgnoreCase("$END")) {
-							this.isEnd = true;
+						int komanda = this.isCommand(temp[0]);
+						if (komanda != 0) {
+							System.out.println(komanda);
 						}
 						else {
-							int komanda = this.isCommand(temp[0]);
-							if (komanda != 0) {
-								System.out.println(komanda);
-							}
-							else {
-								System.out.println("ne komanda");
-							}
+							
 						}
 					}
 					else {

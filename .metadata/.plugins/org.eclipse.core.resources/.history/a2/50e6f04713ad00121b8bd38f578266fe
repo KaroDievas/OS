@@ -206,7 +206,6 @@ public class procesor {
 		String line = null;
 		line = this.channel.base(1, "");
 		this.mr = line;
-		this.setIoi(0);
 	}
 	
 	/*
@@ -318,10 +317,10 @@ public class procesor {
 	
 	public void StepReading() {
 		String sCurrentLine = null;
-			if (br != null  && !this.isEnd) {
+			if (br != null) {
 				try {
-					if (this.getMode() == 0)
-						sCurrentLine = this.br.readLine();
+					//if (this.getMode() == 0)
+					sCurrentLine = this.br.readLine();
 				} catch (IOException e) {
 					System.out.println("Nepavyko nuskaityti failo");
 				}
@@ -342,7 +341,7 @@ public class procesor {
 						this.isFirstWord = false;
 					}
 				}
-				if (this.isStart && this.isFirstWord == false) {
+				if (this.isStart && this.isFirstWord == false && !this.isEnd) {
 					int interrupt = this.interrupting();
 					if (interrupt == 0) {
 						//interruptu nera vykdom programa
