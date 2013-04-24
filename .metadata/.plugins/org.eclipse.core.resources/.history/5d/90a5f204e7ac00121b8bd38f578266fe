@@ -46,7 +46,7 @@ public class procesor {
 	private boolean isStart = false;
 	private boolean isEnd = false;
 	private int maxIP = 0;
-	private String fileName = "C:\\Users\\KD\\Desktop\\failas.txt";
+	private String fileName = "C:\\Users\\KD\\Desktop\\new\\2013-02-17\\2013-02-17_13-50-37.txt";
 	
 	public procesor() {
 		this.inicialize();

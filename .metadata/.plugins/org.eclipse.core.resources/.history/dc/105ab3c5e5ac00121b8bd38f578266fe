@@ -41,27 +41,24 @@ public class procesor {
 	 */
 	Vector stekas=new Vector();
 	private BufferedReader br;
-	private BufferedReader br2;
 	private boolean isFirstWord = true;
 	private boolean isStart = false;
 	private boolean isEnd = false;
 	private int maxIP = 0;
-	private String fileName = "C:\\Users\\KD\\Desktop\\failas.txt";
+	
 	
 	public procesor() {
 		this.inicialize();
 		try {
-			
-			br = new BufferedReader(new FileReader(fileName));
+			br = new BufferedReader(new FileReader("C:\\Users\\KD\\Desktop\\new\\2013-02-17\\2013-02-17_13-50-37.txt"));
 			LineNumberReader  lnr = new LineNumberReader(br);
 			try {
 				lnr.skip(Long.MAX_VALUE);
 				this.maxIP = lnr.getLineNumber();
-				this.br = new BufferedReader(new FileReader(fileName));
 			} catch (IOException e) {
 				System.out.println("Klaida gaunant max failo eiluciu skaiciu");
 			}
-		} catch (IOException e) {
+		} catch (FileNotFoundException e) {
 			System.out.println("Failas nerastas");
 		}
 		this.setMode(0);

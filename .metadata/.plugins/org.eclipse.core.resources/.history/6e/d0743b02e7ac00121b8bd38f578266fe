@@ -46,18 +46,20 @@ public class procesor {
 	private boolean isStart = false;
 	private boolean isEnd = false;
 	private int maxIP = 0;
-	private String fileName = "C:\\Users\\KD\\Desktop\\failas.txt";
+	
 	
 	public procesor() {
 		this.inicialize();
 		try {
 			
-			br = new BufferedReader(new FileReader(fileName));
+			br = new BufferedReader(new FileReader("C:\\Users\\KD\\Desktop\\new\\2013-02-17\\2013-02-17_13-50-37.txt"));
+			br2 = br;
 			LineNumberReader  lnr = new LineNumberReader(br);
 			try {
 				lnr.skip(Long.MAX_VALUE);
 				this.maxIP = lnr.getLineNumber();
-				this.br = new BufferedReader(new FileReader(fileName));
+				this.br = new BufferedReader(new FileReader("C:\\Users\\KD\\Desktop\\new\\2013-02-17\\2013-02-17_13-50-37.txt"));
+				System.out.println( this.br.readLine());
 			} catch (IOException e) {
 				System.out.println("Klaida gaunant max failo eiluciu skaiciu");
 			}

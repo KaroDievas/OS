@@ -35,33 +35,30 @@ public class procesor {
 	private memory RAM = null;
 	private channelMechanism channel = null;
 	private pagination paginationMechanism = null;
-	
+	private int setMr;
 	/**
 	 * @param args
 	 */
 	Vector stekas=new Vector();
 	private BufferedReader br;
-	private BufferedReader br2;
 	private boolean isFirstWord = true;
 	private boolean isStart = false;
 	private boolean isEnd = false;
 	private int maxIP = 0;
-	private String fileName = "C:\\Users\\KD\\Desktop\\failas.txt";
+	
 	
 	public procesor() {
 		this.inicialize();
 		try {
-			
-			br = new BufferedReader(new FileReader(fileName));
+			br = new BufferedReader(new FileReader("C:\\Users\\KD\\Desktop\\new\\2013-02-17\\2013-02-17_13-50-37.txt"));
 			LineNumberReader  lnr = new LineNumberReader(br);
 			try {
 				lnr.skip(Long.MAX_VALUE);
 				this.maxIP = lnr.getLineNumber();
-				this.br = new BufferedReader(new FileReader(fileName));
 			} catch (IOException e) {
 				System.out.println("Klaida gaunant max failo eiluciu skaiciu");
 			}
-		} catch (IOException e) {
+		} catch (FileNotFoundException e) {
 			System.out.println("Failas nerastas");
 		}
 		this.setMode(0);
@@ -74,7 +71,7 @@ public class procesor {
 		this.setDs(0000);
 		this.setIoi(0000);
 		this.setIp(0000);
-		this.setMode(0);
+		this.setMode(1);
 		this.setMr("0");
 		this.setPi(0000);
 		this.setPtr(0000);
@@ -316,11 +313,12 @@ public class procesor {
 	}
 	
 	public void StepReading() {
+		this.READ();
+		System.out.println(this.getMr());
 		String sCurrentLine = null;
 			if (br != null) {
 				try {
-					//if (this.getMode() == 0)
-					sCurrentLine = this.br.readLine();
+					sCurrentLine = br.readLine();
 				} catch (IOException e) {
 					System.out.println("Nepavyko nuskaityti failo");
 				}
@@ -345,13 +343,7 @@ public class procesor {
 					int interrupt = this.interrupting();
 					if (interrupt == 0) {
 						//interruptu nera vykdom programa
-						int komanda = this.isCommand(temp[0]);
-						if (komanda != 0) {
-							System.out.println(komanda);
-						}
-						else {
-							
-						}
+						
 					}
 					else {
 						//issaugome busena
@@ -431,32 +423,12 @@ public class procesor {
 	 * funkcija sukurianti virtualia maðina
 	 */
 	public void createVM() {
-		//reikia iðsaugoti ankstesnës maðinos darbà
-		
-		//toliau nusinulikam senuosius duomenis
-		this.setCs(0000);
-		this.setDs(0000);
-		this.setIoi(0000);
-		this.setIp(0000);
-		this.setMode(1);
-		this.setMr("0");
-		this.setPi(0000);
-		this.setPtr(0000);
-		this.setSi(0000);
-		this.setSp(0000);
-		this.setTi(255);
-		this.br = null;
-		this.isFirstWord = true;
-		this.isStart = false;
-		this.isEnd = false;
-		this.maxIP = 0;
-		
 		
 	}
 	
 	//----------------------------------------------------- cia rasau
 	// PRISIMINTI: rytoj dadeti LOAD,WRITE komandas; sutvarkyti steko 2 elementu problema; is laptopo perkelti nuskaityma.
-	/*public void ADDS(int poslinkis){ // pastaba: steke turi buti bent 2 elementai, kitaip pizdiec... (taisyti ir dokumente)
+	public void ADDS(int poslinkis){ // pastaba: steke turi buti bent 2 elementai, kitaip pizdiec... (taisyti ir dokumente)
 	   int suma=0;
 	   int value1=0;
 	   int value2=0;
@@ -503,29 +475,20 @@ public class procesor {
 		   dalmuo=value2*value1;
 		   stekas.add(dalmuo);
 		}
-	*/
+	
     public void ADDR(int value1, int value2){
-    	int newValue = value1 + value2;
-    	this.setMr(Integer.toString(newValue)); 	
+    	this.setMr=value1 + value2; 	
 	}
     
     public void SUBR(int value1, int value2){
-    	int newValue = value1 - value2;
-    	this.setMr(Integer.toString(newValue)); 
+    	this.setMr=value1 - value2; 	
 	}
     
     public void MULR(int value1, int value2){
-    	int newValue = value1 * value2;
-    	this.setMr(Integer.toString(newValue)); 
+    	this.setMr=value1 * value2; 	
 	}
     public void DIVR(int value1, int value2){
-    	if (value2 == 0) {
-    		this.setMr("0E"); 
-    	}
-    	else {
-    		double newValue = value1 / value2;
-        	this.setMr(Double.toString(newValue)); 
-    	}
+    	this.setMr=value1 / value2; 	
 	}
     
     public void PUSH(int value1){
@@ -539,7 +502,7 @@ public class procesor {
         return value1;	
     }
     
-    /*public int CMPRS() {
+    public int CMPRS() {
     	   int value1=0;
 		   int value2=0;
 		   value1=(int) stekas.firstElement();
@@ -557,7 +520,7 @@ public class procesor {
 		else {
 			return 0;
 		}
-	}*/
+	}
 	//----------------------------------------------------- iki cia
 	
 	public memory getRAM() {
