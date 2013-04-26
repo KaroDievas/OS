@@ -237,7 +237,7 @@ public class procesor {
 			else {
 				printas = "0";
 			}
-			this.channel.base(2, printas);
+			this.channel.base(2, value);
 		}
 		this.setIoi(0);
 	}
@@ -266,35 +266,15 @@ public class procesor {
 	}
 	
 	public void CMPCheck(String value1, String value2) {
-		int reiksme1 = 0;
-		int reiksme2 = 0;
-		if (value1.equalsIgnoreCase("MR")) {
-			if (value1.matches("((-|\\+)?[0-9]+(\\.[0-9]+)?)+")) {  
-	            //this.CMPR(Integer.parseInt(value1), Integer.parseInt(value2));
-	        } else {  
-	        	reiksme1 = -1;  
-	        }   
-		}
-		else {
-			reiksme1 = this.getRegisterValue(value1);
-		}
-		if (value2.equalsIgnoreCase("MR")) {
+		if (value1.matches("((-|\\+)?[0-9]+(\\.[0-9]+)?)+")) {  
 			if (value2.matches("((-|\\+)?[0-9]+(\\.[0-9]+)?)+")) {  
-	            //this.CMPR(Integer.parseInt(value1), Integer.parseInt(value2));
+	            this.CMPR(Integer.parseInt(value1), Integer.parseInt(value2));
 	        } else {  
-	        	reiksme2 = -1;  
+	            this.setMr("-1");  
 	        }   
-		}
-		else {
-			reiksme2 = this.getRegisterValue(value2);
-		}
-		
-		if (reiksme1 == -1 || reiksme2 == -1) {
-			this.setMr("-1");
-		}
-		else {
-			this.CMPR(reiksme1, reiksme2);
-		}
+        } else {  
+            this.setMr("-1");  
+        }  
 	}
 	
 	public void CMPR(int value1, int value2) {
@@ -408,8 +388,7 @@ public class procesor {
 				} catch (IOException e) {
 					System.out.println("Nepavyko nuskaityti failo");
 				}
-				if (sCurrentLine != null)
-					System.out.println(sCurrentLine);
+				System.out.println(sCurrentLine);
 				String[] temp = null;
 				if (sCurrentLine != null)
 					temp = sCurrentLine.split("\\ ");
@@ -504,9 +483,8 @@ public class procesor {
 						this.returnState();
 					}
 					this.setTi(this.getTi() - 1);
-				}
-				if (this.getMode() == 0 && this.interrupting() == 0)
-					this.setIp(this.getIp() + 1);
+				}	
+				this.setIp(this.getIp() + 1);
 			}
 		}
 	}

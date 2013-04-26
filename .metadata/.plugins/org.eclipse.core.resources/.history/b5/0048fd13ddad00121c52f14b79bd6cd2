@@ -39,6 +39,7 @@ public class procesor {
 	/**
 	 * @param args
 	 */
+	Vector stekas=new Vector();
 	private BufferedReader br;
 	private BufferedReader br2;
 	private boolean isFirstWord = true;
@@ -46,8 +47,6 @@ public class procesor {
 	private boolean isEnd = false;
 	private int maxIP = 0;
 	private String fileName = "C:\\Users\\KD\\Desktop\\failas.txt";
-	private String printRegisterName = "";
-	
 	
 	public procesor() {
 		this.inicialize();
@@ -198,7 +197,7 @@ public class procesor {
 		this.isEnd = false;
 		this.isFirstWord = true;
 		this.isStart = false;
-		this.channel.base(2, "Programa baigia darba");
+		this.channel.base(2, "Klaidingas programos start");
 	}
 	/**
 	 * Programa nuskaito is klavieturos vedama teksta ir priskiria registrui
@@ -214,116 +213,34 @@ public class procesor {
 	 * funkcija kreipiasi i kanalu mechanizma ir isspauzdina nurodyta teksta
 	 */
 	public void PRINT(String value) {
-		if (this.printRegisterName.equalsIgnoreCase("")) {
-			this.channel.base(2, value);
-		}
-		else {
-			String printas = null;
-			if (this.printRegisterName.equalsIgnoreCase("MR")) {
-				printas = this.getMr();
-			}
-			else if (this.printRegisterName.equalsIgnoreCase("IP")) {
-				printas = Integer.toString(this.getIp());
-			}
-			else if (this.printRegisterName.equalsIgnoreCase("CS")) {
-				printas = Integer.toString(this.getCs());
-			}
-			else if (this.printRegisterName.equalsIgnoreCase("DS")) {
-				printas = Integer.toString(this.getDs());
-			}
-			else if (this.printRegisterName.equalsIgnoreCase("SP")) {
-				printas = Integer.toString(this.getSp());
-			}
-			else {
-				printas = "0";
-			}
-			this.channel.base(2, printas);
-		}
-		this.setIoi(0);
+		this.channel.base(2, value);
 	}
 	
 	public void LOAD(){
-		this.setIoi(0);
+		
 	}
 	
 	public void WRITE() {
-		this.setIoi(0);
+		
 	}
 	
 	public void JMP(int poslinkis) {
 		int newIP = this.getIp() + poslinkis;
-		if (newIP > this.maxIP) { //PI 1
+		if (newIP > this.maxIP) {
 			this.HALT();
 			this.channel.base(2, "Pezengtas IP rezis");
 		}
 		else {
-			int i = this.getIp();
-			while(i < newIP) {
-				i++;
-			}
 			this.setIp(newIP);
 		}
 	}
 	
-	public void CMPCheck(String value1, String value2) {
-		int reiksme1 = 0;
-		int reiksme2 = 0;
-		if (value1.equalsIgnoreCase("MR")) {
-			if (value1.matches("((-|\\+)?[0-9]+(\\.[0-9]+)?)+")) {  
-	            //this.CMPR(Integer.parseInt(value1), Integer.parseInt(value2));
-	        } else {  
-	        	reiksme1 = -1;  
-	        }   
-		}
-		else {
-			reiksme1 = this.getRegisterValue(value1);
-		}
-		if (value2.equalsIgnoreCase("MR")) {
-			if (value2.matches("((-|\\+)?[0-9]+(\\.[0-9]+)?)+")) {  
-	            //this.CMPR(Integer.parseInt(value1), Integer.parseInt(value2));
-	        } else {  
-	        	reiksme2 = -1;  
-	        }   
-		}
-		else {
-			reiksme2 = this.getRegisterValue(value2);
-		}
-		
-		if (reiksme1 == -1 || reiksme2 == -1) {
-			this.setMr("-1");
-		}
-		else {
-			this.CMPR(reiksme1, reiksme2);
-		}
-	}
-	
-	public void CMPR(int value1, int value2) {
+	public int CMPR(int value1, int value2) {
 		if (value1 > value2) {
-			this.setMr(Integer.toString(1));
+			return 1;
 		}
 		else if(value1 < value2) {
-			this.setMr(Integer.toString(2));
-		}
-		else {
-			this.setMr(Integer.toString(0));
-		}
-	}
-	
-	public int getRegisterValue(String register) {
-		if (register.equalsIgnoreCase("MR")) {
-			return Integer.parseInt(this.getMr());
-		}
-		else if (register.equalsIgnoreCase("IP")) {
-			return this.getIp();
-		}
-		else if (register.equalsIgnoreCase("CS")) {
-			return this.getCs();
-		}
-		else if (register.equalsIgnoreCase("DS")) {
-			return this.getDs();
-		}
-		else if (register.equalsIgnoreCase("SP")) {
-			return this.getSp();
+			return 2;
 		}
 		else {
 			return 0;
@@ -403,19 +320,18 @@ public class procesor {
 		String sCurrentLine = null;
 			if (br != null  && !this.isEnd) {
 				try {
-					if (this.getMode() == 0 && this.interrupting() == 0)
+					if (this.getMode() == 0)
 						sCurrentLine = this.br.readLine();
 				} catch (IOException e) {
 					System.out.println("Nepavyko nuskaityti failo");
 				}
-				if (sCurrentLine != null)
-					System.out.println(sCurrentLine);
+				System.out.println(sCurrentLine);
 				String[] temp = null;
 				if (sCurrentLine != null)
 					temp = sCurrentLine.split("\\ ");
 				if (this.isFirstWord) {
 					if (this.isStart == false) {
-						//System.out.println(temp[0]);
+						System.out.println(temp[0]);
 						if (temp[0].equalsIgnoreCase("$START")) {
 							//pirmas zodis butinai turi buti $start
 							this.isStart = true;
@@ -438,35 +354,41 @@ public class procesor {
 							this.isEnd = true;
 						}
 						else {
-							if (temp[0].equalsIgnoreCase("PRINT")) 
-								this.printRegisterName = temp[1];
 							int komanda = this.isCommand(temp[0]);
 							if (komanda != 0) {
 								switch (komanda) {
-								case 5: this.ADDR(this.getRegisterValue(temp[1]), this.getRegisterValue(temp[2])); //addr
+								case 5: this.LOAD();
 									break;
-								case 6: this.SUBR(this.getRegisterValue(temp[1]), this.getRegisterValue(temp[2])); //subr
+								case 6: this.WRITE();
 									break;
-								case 7: this.MULR(this.getRegisterValue(temp[1]), this.getRegisterValue(temp[2])); //mulr
+								case 7: this.PRINT(this.getMr());
 									break;
-								case 8: this.DIVR(this.getRegisterValue(temp[1]), this.getRegisterValue(temp[2])); //divr
+								case 8: this.READ();
 									break;
-								case 9: this.PUSH(this.getRegisterValue(temp[1])); //push
+								case 9: this.READ();
 									break;
-								case 10: this.POP(temp[1]); //pop
+								case 10: this.READ();
 									break;
-								case 12: this.CMPCheck(temp[1], temp[2]); //cmpr
+								case 12: this.READ();
 									break;
-								case 13: this.JMP(Integer.parseInt(temp[1])); //jmp
+								case 13: this.READ();
 									break;
-								case 18: this.HALT(); //halt
+								case 14: this.READ();
 									break;
-								case 19: this.MOV(temp[1], temp[2]); //mov
+								case 15: this.READ();
 									break;
-								default: //System.out.println("Neatpazinta komanda");
+								case 16: this.READ();
+									break;
+								case 17: this.READ();
+									break;
+								case 18: this.READ();
+									break;
+								case 19: this.READ();
+									break;
+								default: System.out.println("IOI apdorojimo klaida");
 				                	break;
 								}
-								//System.out.println(komanda); // nuo 5 ismetant 11 iki 19
+								System.out.println(komanda); // nuo 5 ismetant 11 iki 19
 							}
 							else {
 								System.out.println("ne komanda");
@@ -504,9 +426,8 @@ public class procesor {
 						this.returnState();
 					}
 					this.setTi(this.getTi() - 1);
-				}
-				if (this.getMode() == 0 && this.interrupting() == 0)
-					this.setIp(this.getIp() + 1);
+				}	
+				this.setIp(this.getIp() + 1);
 			}
 		}
 	}
@@ -574,7 +495,57 @@ public class procesor {
 		
 		
 	}
-
+	
+	//----------------------------------------------------- cia rasau
+	// PRISIMINTI: rytoj dadeti LOAD,WRITE komandas; sutvarkyti steko 2 elementu problema; is laptopo perkelti nuskaityma.
+	/*public void ADDS(int poslinkis){ // pastaba: steke turi buti bent 2 elementai, kitaip pizdiec... (taisyti ir dokumente)
+	   int suma=0;
+	   int value1=0;
+	   int value2=0;
+	   value1=(int) stekas.firstElement();
+	   stekas.removeElement(value1);
+	   value2=(int) stekas.firstElement();
+	   stekas.removeElement(value2);
+	   suma=value1+value2;
+	   stekas.add(suma);
+	}
+	
+	public void SUBS(int poslinkis){ // pastaba: steke turi buti bent 2 elementai, kitaip pizdiec... (taisyti ir dokumente)
+		   int skirtumas=0;
+		   int value1=0;
+		   int value2=0;
+		   value1=(int) stekas.firstElement();
+		   stekas.removeElement(value1);
+		   value2=(int) stekas.firstElement();
+		   stekas.removeElement(value2);
+		   skirtumas=value2-value1;
+		   stekas.add(skirtumas);
+		}
+	
+	public void MULS(int poslinkis){ // pastaba: steke turi buti bent 2 elementai, kitaip pizdiec... (taisyti ir dokumente)
+		   int sandauga=0;
+		   int value1=0;
+		   int value2=0;
+		   value1=(int) stekas.firstElement();
+		   stekas.removeElement(value1);
+		   value2=(int) stekas.firstElement();
+		   stekas.removeElement(value2);
+		   sandauga=value2*value1;
+		   stekas.add(sandauga);
+		}
+	
+	public void DIVS(int poslinkis){ // pastaba: steke turi buti bent 2 elementai, kitaip pizdiec... (taisyti ir dokumente)
+		   int dalmuo=0;
+		   int value1=0;
+		   int value2=0;
+		   value1=(int) stekas.firstElement();
+		   stekas.removeElement(value1);
+		   value2=(int) stekas.firstElement();
+		   stekas.removeElement(value2);
+		   dalmuo=value2*value1;
+		   stekas.add(dalmuo);
+		}
+	*/
     public void ADDR(int value1, int value2){
     	int newValue = value1 + value2;
     	this.setMr(Integer.toString(newValue)); 	
@@ -600,15 +571,37 @@ public class procesor {
 	}
     
     public void PUSH(int value1){
-    	this.setSp(this.getSp() + 1);
-    	
+    	stekas.add(0,new Integer(value1));
     }
 	
-    public void POP(String register){
-    	this.setSp(this.getSp() - 1);
-    	
+    public int POP(){
+        int value1;
+        value1=(int) stekas.firstElement();
+        stekas.removeElement(value1);
+        return value1;	
     }
-   
+    
+    /*public int CMPRS() {
+    	   int value1=0;
+		   int value2=0;
+		   value1=(int) stekas.firstElement();
+		   stekas.removeElement(value1);
+		   value2=(int) stekas.firstElement();
+		   stekas.removeElement(value2);
+		   stekas.add(0,new Integer(value2));
+		   stekas.add(0,new Integer(value1));
+		if (value1 > value2) {
+			return 1;
+		}
+		else if(value1 < value2) {
+			return 2;
+		}
+		else {
+			return 0;
+		}
+	}*/
+	//----------------------------------------------------- iki cia
+	
 	public memory getRAM() {
 		return RAM;
 	}
