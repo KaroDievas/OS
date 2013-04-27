@@ -71,6 +71,7 @@ public class procesor {
 	 * Inicializuojame visas pradiniu kintamuju reiksmes
 	 */
 	public void inicialize() {
+		System.out.println(Integer.parseInt("2512.15"));
 		this.setCs(0000);
 		this.setDs(0000);
 		this.setIoi(0000);
@@ -395,21 +396,20 @@ public class procesor {
 			
 		}
 		else if (reg2.matches("((-|\\+)?[0-9]+(\\.[0-9]+)?)+")) { 
-			float reiksme = Float.parseFloat(reg2);
 			if (reg1.equalsIgnoreCase("SP")) {
-				this.setSp((int)reiksme);
+				
 			}
 			else if (reg1.equalsIgnoreCase("CS")) {
-				this.setCs((int)reiksme);
+				
 			}
 			else if (reg1.equalsIgnoreCase("DS")) {
-				this.setDs((int)reiksme);
+				
 			}
 			else if (reg1.equalsIgnoreCase("MR")) {
-				this.setMr(Integer.toString((int)reiksme));
+	
 			}
 			else if (reg1.equalsIgnoreCase("IP")) {
-				this.setIp((int)reiksme);
+	
 			}
 			else {
 				this.setPi(3);

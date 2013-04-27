@@ -176,7 +176,7 @@ public class procesor {
 		if (this.getTi() == 0) {
 			return 4;
 		}
-		else if (this.getIoi() > 0) {
+		if (this.getIoi() > 0) {
 			return 1;
 		}
 		else if (this.getSi() > 0) {
@@ -331,89 +331,68 @@ public class procesor {
 	}
 	
 	public void MOV(String reg1, String reg2) {
-		if (reg1.equalsIgnoreCase("MR") && reg2.equalsIgnoreCase("DS")) {
+		if (reg1 == "MR" && reg2 == "DS") {
 			this.setMr(Integer.toString(this.getDs()));
 		}
-		else if (reg1.equalsIgnoreCase("MR") && reg2.equalsIgnoreCase("CS")) {
+		else if (reg1 == "MR" && reg2 == "CS") {
 			this.setMr(Integer.toString(this.getCs()));
 		}
-		else if (reg1.equalsIgnoreCase("MR") && reg2.equalsIgnoreCase("IP")) {
+		else if (reg1 == "MR" && reg2 == "IP") {
 			this.setMr(Integer.toString(this.getIp()));
 		}
-		else if (reg1.equalsIgnoreCase("MR") && reg2.equalsIgnoreCase("SP")) {
+		else if (reg1 == "MR" && reg2 == "SP") {
 			this.setMr(Integer.toString(this.getSp()));
 		}
-		else if (reg1.equalsIgnoreCase("DS") && reg2.equalsIgnoreCase("MR")) {
+		else if (reg1 == "DS" && reg2 == "MR") {
 			this.setDs(Integer.parseInt(this.getMr()));
 		}
-		else if (reg1.equalsIgnoreCase("DS") && reg2.equalsIgnoreCase("CS")) {
+		else if (reg1 == "DS" && reg2 == "CS") {
 			this.setDs(this.getCs());
 		}
-		else if (reg1.equalsIgnoreCase("DS") && reg2.equalsIgnoreCase("IP")) {
+		else if (reg1 == "DS" && reg2 == "IP") {
 			this.setDs(this.getIp());
 		}
-		else if (reg1.equalsIgnoreCase("DS") && reg2.equalsIgnoreCase("SP")) {
+		else if (reg1 == "DS" && reg2 == "SP") {
 			this.setDs(this.getSp());
 		}
-		else if (reg1.equalsIgnoreCase("CS") && reg2.equalsIgnoreCase("MR")) {
+		else if (reg1 == "CS" && reg2 == "MR") {
 			this.setCs(Integer.parseInt(this.getMr()));
 		}
-		else if (reg1.equalsIgnoreCase("CS") && reg2.equalsIgnoreCase("DS")) {
+		else if (reg1 == "CS" && reg2 == "DS") {
 			this.setCs(this.getDs());
 		}
-		else if (reg1.equalsIgnoreCase("CS") && reg2.equalsIgnoreCase("IP")) {
+		else if (reg1 == "CS" && reg2 == "IP") {
 			this.setCs(this.getIp());
 		}
-		else if (reg1.equalsIgnoreCase("CS") && reg2.equalsIgnoreCase("SP")) {
+		else if (reg1 == "CS" && reg2 == "SP") {
 			this.setCs(this.getSp());
 		}
-		else if (reg1.equalsIgnoreCase("IP") && reg2.equalsIgnoreCase("MR")) {
+		else if (reg1 == "IP" && reg2 == "MR") {
 			this.setIp(Integer.parseInt(this.getMr()));
 		}
-		else if (reg1.equalsIgnoreCase("IP") && reg2.equalsIgnoreCase("DS")) {
+		else if (reg1 == "IP" && reg2 == "DS") {
 			this.setIp(this.getDs());
 		}
-		else if (reg1.equalsIgnoreCase("IP") && reg2.equalsIgnoreCase("SP")) {
+		else if (reg1 == "IP" && reg2 == "SP") {
 			this.setIp(this.getSp());
 		}
-		else if (reg1.equalsIgnoreCase("IP") && reg2.equalsIgnoreCase("CS")) {
+		else if (reg1 == "IP" && reg2 == "CS") {
 			this.setIp(this.getCs());
 		}
-		else if (reg1.equalsIgnoreCase("SP") && reg2.equalsIgnoreCase("MR")) {
+		else if (reg1 == "SP" && reg2 == "MR") {
 			this.setSp(Integer.parseInt(this.getMr()));
 		}
-		else if (reg1.equalsIgnoreCase("SP") && reg2.equalsIgnoreCase("DS")) {
+		else if (reg1 == "SP" && reg2 == "DS") {
 			this.setSp(this.getDs());
 		}
-		else if (reg1.equalsIgnoreCase("SP") && reg2.equalsIgnoreCase("CS")) {
+		else if (reg1 == "SP" && reg2 == "CS") {
 			this.setSp(this.getCs());
 		}
-		else if (reg1.equalsIgnoreCase("SP") && reg2.equalsIgnoreCase("IP")) {
+		else if (reg1 == "SP" && reg2 == "IP") {
 			this.setSp(this.getIp());
 		}
-		else if (reg1.equalsIgnoreCase(reg2)) {
+		else if (reg1 == reg2) {
 			
-		}
-		else if (reg2.matches("((-|\\+)?[0-9]+(\\.[0-9]+)?)+")) { 
-			float reiksme = Float.parseFloat(reg2);
-			if (reg1.equalsIgnoreCase("SP")) {
-				this.setSp((int)reiksme);
-			}
-			else if (reg1.equalsIgnoreCase("CS")) {
-				this.setCs((int)reiksme);
-			}
-			else if (reg1.equalsIgnoreCase("DS")) {
-				this.setDs((int)reiksme);
-			}
-			else if (reg1.equalsIgnoreCase("MR")) {
-				this.setMr(Integer.toString((int)reiksme));
-			}
-			else if (reg1.equalsIgnoreCase("IP")) {
-				this.setIp((int)reiksme);
-			}
-			else {
-				this.setPi(3);
-			}
 		}
 		else {
 			this.setPi(3);
@@ -489,6 +468,7 @@ public class procesor {
 								default: //System.out.println("Neatpazinta komanda");
 				                	break;
 								}
+								//System.out.println(komanda); // nuo 5 ismetant 11 iki 19
 							}
 							else {
 								System.out.println("ne komanda");
@@ -502,33 +482,32 @@ public class procesor {
 						
 						if (interrupt == 1) { //IOI
 							switch (this.getIoi()) {
-								case 1: this.LOAD();
-									break;
-								case 2: this.WRITE();
-									break;
-								case 3: this.PRINT(this.getMr());
-									break;
-								case 4: this.READ();
-									break;
-								default: System.out.println("IOI apdorojimo klaida");
-				                	break;
-							}
+							case 1: this.LOAD();
+								break;
+							case 2: this.WRITE();
+								break;
+							case 3: this.PRINT(this.getMr());
+								break;
+							case 4: this.READ();
+								break;
+							default: System.out.println("IOI apdorojimo klaida");
+			                	break;
 						}
-						else if (interrupt == 2) { //SI
+						if (interrupt == 2) { //SI
 							//nezinau ka daryti su SI, galbut tokio kaip SI nereikia
 						}
-						else if (interrupt == 3) { //PI
+						if (interrupt == 3) { //PI
 							this.intPIValidation();
 						}
-						else if (interrupt == 4) { //TI
+						if (interrupt == 4) { //TI
+							System.out.println("halt vbyk");
 							this.HALT();
-						}
-						else {
 						}
 						//gryztame i buvusia busena ir toliau vykdome komandas
 						this.returnState();
 					}
-				this.setTi(this.getTi() - 1);
+					this.setTi(this.getTi() - 1);
+				}
 			}
 		}
 	}
