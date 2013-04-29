@@ -108,65 +108,56 @@ public class procesor {
 				/*
 				 * 
 				 */
-	        case "ADDS":  commandType = 1;
-                break;
-	        case "SUBS":  commandType = 2;
+	        case "ADDR":  commandType = 1;
             	break;
-	        case "MULS":  commandType = 3;
-            	break;
-	        case "DIVS":  commandType = 4;
-	        	break;
-	        case "ADDR":  commandType = 5;
-            	break;
-	        case "SUBR":  commandType = 6;
+	        case "SUBR":  commandType = 2;
         		break;
-	        case "MULR":  commandType = 7;
+	        case "MULR":  commandType = 3;
             	break;
-	        case "DIVR":  commandType = 8;
+	        case "DIVR":  commandType = 4;
             	break;
 		        /*
 		         * 
 		         */
-	        case "PUSH":  commandType = 9;
+	        case "PUSH":  commandType = 5;
             	break;
-	        case "POP":  commandType = 10;
+	        case "POP":  commandType = 6;
 	        	break;
 	        	/**
 	        	 * 
 	        	 */
-	        case "CMPS":  commandType = 11;
-            	break;
-	        case "CMPR":  commandType = 12;
-            	break;
-            	/**
-            	 * 
-            	 */
-	        case "JMP":  commandType = 13;
+	        
+	        case "CMPR":  commandType = 7;
             	break;
             	/**
             	 * 
             	 */
-	        case "READ":  commandType = 14;
-	        			this.setIoi(4);
-            	break;
-	        case "PRINT":  commandType = 15;
-	        			this.setIoi(3);
-            	break;
-	        case "LOAD":  commandType = 16;
-	        			this.setIoi(1);
-	        	break;
-	        case "WRITE":  commandType = 17;
-	        			this.setIoi(2);
+	        case "JMP":  commandType = 8;
             	break;
             	/**
             	 * 
             	 */
-	        case "HALT":  commandType = 18;
+	        case "HALT":  commandType = 9;
         		break;
-	        case "MOV":  commandType = 19;
+	        case "MOV":  commandType = 10;
         		break;
 	        default: this.setPi(2);
                 break;
+            	/**
+            	 * 
+            	 */
+	        case "READ":  commandType = 11;
+	        			this.setIoi(4);
+            	break;
+	        case "PRINT":  commandType = 12;
+	        			this.setIoi(3);
+            	break;
+	        case "LOAD":  commandType = 13;
+	        			this.setIoi(1);
+	        	break;
+	        case "WRITE":  commandType = 14;
+	        			this.setIoi(2);
+            	break;   	
 	    }
 		return commandType;
 	}
@@ -466,25 +457,25 @@ public class procesor {
 							int komanda = this.isCommand(temp[0]);
 							if (komanda != 0) {
 								switch (komanda) {
-								case 5: this.ADDR(this.getRegisterValue(temp[1]), this.getRegisterValue(temp[2])); //addr
+								case 1: this.ADDR(this.getRegisterValue(temp[1]), this.getRegisterValue(temp[2])); //addr
 									break;
-								case 6: this.SUBR(this.getRegisterValue(temp[1]), this.getRegisterValue(temp[2])); //subr
+								case 2: this.SUBR(this.getRegisterValue(temp[1]), this.getRegisterValue(temp[2])); //subr
 									break;
-								case 7: this.MULR(this.getRegisterValue(temp[1]), this.getRegisterValue(temp[2])); //mulr
+								case 3: this.MULR(this.getRegisterValue(temp[1]), this.getRegisterValue(temp[2])); //mulr
 									break;
-								case 8: this.DIVR(this.getRegisterValue(temp[1]), this.getRegisterValue(temp[2])); //divr
+								case 4: this.DIVR(this.getRegisterValue(temp[1]), this.getRegisterValue(temp[2])); //divr
 									break;
-								case 9: this.PUSH(this.getRegisterValue(temp[1])); //push
+								case 5: this.PUSH(this.getRegisterValue(temp[1])); //push
 									break;
-								case 10: this.POP(temp[1]); //pop
+								case 6: this.POP(temp[1]); //pop
 									break;
-								case 12: this.CMPCheck(temp[1], temp[2]); //cmpr
+								case 7: this.CMPCheck(temp[1], temp[2]); //cmpr
 									break;
-								case 13: this.JMP(Integer.parseInt(temp[1])); //jmp
+								case 8: this.JMP(Integer.parseInt(temp[1])); //jmp
 									break;
-								case 18: this.HALT(); //halt
+								case 9: this.HALT(); //halt
 									break;
-								case 19: this.MOV(temp[1], temp[2]); //mov
+								case 10: this.MOV(temp[1], temp[2]); //mov
 									break;
 								default: //System.out.println("Neatpazinta komanda");
 				                	break;
