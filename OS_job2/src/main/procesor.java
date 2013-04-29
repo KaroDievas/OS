@@ -151,13 +151,7 @@ public class procesor {
             	break;
 	        case "PRINT":  commandType = 12;
 	        			this.setIoi(3);
-            	break;
-	        case "LOAD":  commandType = 13;
-	        			this.setIoi(1);
-	        	break;
-	        case "WRITE":  commandType = 14;
-	        			this.setIoi(2);
-            	break;   	
+            	break; 	
 	    }
 		return commandType;
 	}
@@ -233,13 +227,6 @@ public class procesor {
 		this.setIoi(0);
 	}
 	
-	public void LOAD(){
-		this.setIoi(0);
-	}
-	
-	public void WRITE() {
-		this.setIoi(0);
-	}
 	
 	public void JMP(int poslinkis) {
 		int newIP = this.getIp() + poslinkis;
@@ -493,25 +480,18 @@ public class procesor {
 						
 						if (interrupt == 1) { //IOI
 							switch (this.getIoi()) {
-								case 1: this.LOAD();
+								case 1: this.PRINT(this.getMr());
 									break;
-								case 2: this.WRITE();
-									break;
-								case 3: this.PRINT(this.getMr());
-									break;
-								case 4: this.READ();
+								case 2: this.READ();
 									break;
 								default: System.out.println("IOI apdorojimo klaida");
 				                	break;
 							}
 						}
-						else if (interrupt == 2) { //SI
-							//nezinau ka daryti su SI, galbut tokio kaip SI nereikia
-						}
-						else if (interrupt == 3) { //PI
+						else if (interrupt == 1) { //PI
 							this.intPIValidation();
 						}
-						else if (interrupt == 4) { //TI
+						else if (interrupt == 2) { //TI
 							this.HALT();
 						}
 						else {
